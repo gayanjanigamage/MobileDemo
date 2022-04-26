@@ -1,0 +1,5 @@
+# Ignore Compiled Classes
+/target
+
+# Ignore IntelliJ IDEA Data Files
+/.idea
