@@ -9,7 +9,7 @@
 		<classes>
 			<class name="tests.SingleProductTest" />
 			<class name="tests.TwoProductsTest" />
-			<class name="tests.NegetiveTest" />
+			<class name="tests.NegativeTest" />
 		</classes>
 	</test>
 

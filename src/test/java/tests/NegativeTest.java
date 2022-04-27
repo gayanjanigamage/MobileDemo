@@ -5,7 +5,7 @@ import org.mobiledemo.pageobjects.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class NegetiveTest extends Base {
+public class NegativeTest extends Base {
 
     @Test(priority = 1)
     public void invalidLogin() throws InterruptedException {
