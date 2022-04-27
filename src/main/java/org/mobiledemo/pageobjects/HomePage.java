@@ -10,7 +10,7 @@ import org.testng.Assert;
 import java.util.List;
 import java.util.Objects;
 
-public class HomePage {
+public class HomePage extends BasePage{
 
     private WebDriver driver;
 
@@ -30,6 +30,10 @@ public class HomePage {
     public void search(String searchText) {
         SEARCH_FIELD.clear();
         SEARCH_FIELD.sendKeys(searchText);
-        SEARCH_SUBMIT.click();
+        clickByJS(SEARCH_SUBMIT);
+    }
+
+    @Override
+    public void proceedOnCheckout() {
     }
 }

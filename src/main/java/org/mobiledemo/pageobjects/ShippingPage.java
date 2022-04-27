@@ -19,11 +19,13 @@ public class ShippingPage extends BasePage{
     }
 
     public void clickTermsOnService(){
+
         CHK_SHIPPING.click();
     }
 
     @Override
     public void proceedOnCheckout(){
+
         PROCEED_CHKOUT.click();
     }
 }

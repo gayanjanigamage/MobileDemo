@@ -7,7 +7,9 @@
 		<parameter name="email" value="gayanjanigamage@gmail.com" />
 		<parameter name="password" value="Password1234" />
 		<classes>
-			<class name="tests.oneProduct" />
+			<class name="tests.SingleProductTest" />
+			<class name="tests.TwoProductsTest" />
+			<class name="tests.NegetiveTest" />
 		</classes>
 	</test>
 

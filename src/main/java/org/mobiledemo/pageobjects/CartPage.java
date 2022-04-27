@@ -1,5 +1,6 @@
 package org.mobiledemo.pageobjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -7,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CartPage extends BasePage {
@@ -40,6 +43,21 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "(//a[@title='Proceed to checkout'])[2]")
     private WebElement PROCEED_CHKOUT ;
 
+    @FindBy(css = "[title='Continue shopping']")
+    private WebElement CONTINUE_SHOP ;
+
+    @FindBy(css = "a[title='Women']")
+    private WebElement WOMEN_MENU ;
+
+    @FindBy(css = "h1 span.cat-name")
+    private WebElement WOMEN_CAT ;
+
+    @FindBy(className = "cat-title")
+    private WebElement CAT_TITLE ;
+
+    @FindBy(className = "cart_item")
+    private List <WebElement> CART_ITEMS ;
+
 
     public CartPage(WebDriver driver){
         this.driver = driver;
@@ -48,19 +66,36 @@ public class CartPage extends BasePage {
 
     public void addToCart(){
         hoverOnElement(TSHIRT);
-        waitForElement(BTN_ADDTO_CART);
-        BTN_ADDTO_CART.click();
-        scrollToElement(BTN_PROCEED);
-        BTN_PROCEED.click();
+        clickByJS(BTN_ADDTO_CART);
+        clickByJS(BTN_PROCEED);
+
+    }
+
+    public void addtwoProductsToCart(String product1,String product2){
+
+        List<String> list = new ArrayList<String>(Arrays.asList(product1,product2)) ;
+        for (String s: list) {
+            WebElement element = driver.findElement(By.cssSelector("[data-id-product='"+s+"'] span"));
+            WebElement product = driver.findElement(By.cssSelector("ul.product_list > li:nth-child("+s+")"));
+            hoverOnElement(product);
+            clickByJS(element);
+            clickByJS(CONTINUE_SHOP);
+        }
+
+    }
+
+    public void goToWomenMenu(){
+        clickByJS(CAT_TITLE);
+        clickByJS(WOMEN_MENU);
+        waitForElement(WOMEN_CAT);
     }
 
     public void goToCheckoutPage(){
-       clickByJS(MY_CART);
-       clickByJS(GO_TO_CHECKOUT);
+        waitForElementAndClick(MY_CART);
+        waitForElementAndClick(GO_TO_CHECKOUT);
     }
 
     public boolean onCartPage(){
-        waitForElement(CART_TITLE);
         scrollToElement(CART_TITLE);
         return CART_TITLE.isDisplayed();
     }
@@ -71,15 +106,18 @@ public class CartPage extends BasePage {
         }else{
             hoverOnElement(MY_CART);
             for(WebElement element : REMOVE){
-                element.click();
+                clickByJS(element);
             }
         }
     }
 
     @Override
     public void proceedOnCheckout(){
-        scrollToElement(PROCEED_CHKOUT);
-        PROCEED_CHKOUT.click();
+        clickByJS(PROCEED_CHKOUT);
+    }
+
+    public int getNumberOfCartItems(){
+        return CART_ITEMS.size();
     }
 
 }

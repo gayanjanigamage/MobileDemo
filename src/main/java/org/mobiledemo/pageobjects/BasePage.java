@@ -20,11 +20,13 @@ public abstract class BasePage extends Base {
 
     public void hoverOnElement(WebElement element){
         Actions action = new Actions(driver);
+        waitForElement(element);
         action.moveToElement(element);
 
     }
 
     public void scrollToElement(WebElement element){
+        waitForElement(element);
         JavascriptExecutor js = (JavascriptExecutor)driver;
         js.executeScript("arguments[0].scrollIntoView();",element);
     }
@@ -32,12 +34,26 @@ public abstract class BasePage extends Base {
     public abstract void proceedOnCheckout();
 
     public String getText(WebElement element){
+        waitForElement(element);
         return element.getText();
     }
 
     public void clickByJS(WebElement element){
+        waitForElement(element);
+        scrollToElement(element);
         JavascriptExecutor js = (JavascriptExecutor)driver;
         js.executeScript("arguments[0].click();", element);
+    }
+
+    public void typeText(WebElement element,String text){
+        waitForElement(element);
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    public void waitForElementAndClick(WebElement element){
+        waitForElement(element);
+        element.click();
     }
 
 }

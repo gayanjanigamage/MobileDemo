@@ -24,20 +24,26 @@ public class LoginPage extends BasePage{
     @FindBy(id = "SubmitLogin")
     private WebElement LOGIN_BTN;
 
+    @FindBy(css = "div.alert ol")
+    private WebElement AUTH_ERROR;
+
+
     public LoginPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
     public void login(String email,String password) throws InterruptedException {
-        SIGN_IN_BTN.click();
-        USERID_FIELD.clear();
-        USERID_FIELD.sendKeys(email);
-        PASSWORD_FIELD.clear();
-        PASSWORD_FIELD.sendKeys(password);
+        clickByJS(SIGN_IN_BTN);
+        typeText(USERID_FIELD,email);
+        typeText(PASSWORD_FIELD,password);
         clickByJS(LOGIN_BTN);
         Thread.sleep(6000);
 
+    }
+
+    public String getAuthenticationError(){
+        return AUTH_ERROR.getText();
     }
 
     @Override
