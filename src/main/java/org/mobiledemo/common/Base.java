@@ -9,7 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -21,12 +23,6 @@ public class Base {
 
     @BeforeClass
     public void setUp() throws Exception {
-
-//        WebDriverManager.chromedriver().setup();
-//        driver = new ChromeDriver();
-//        driver.manage().window().maximize();
-//        driver.get("http://automationpractice.com/");
-//        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "chrome");

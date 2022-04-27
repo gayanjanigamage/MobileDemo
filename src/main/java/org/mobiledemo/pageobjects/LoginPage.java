@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class LoginPage {
+public class LoginPage extends BasePage{
 
     private WebDriver driver;
 
@@ -29,13 +29,19 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void login() {
+    public void login(String email,String password) throws InterruptedException {
         SIGN_IN_BTN.click();
         USERID_FIELD.clear();
-        USERID_FIELD.sendKeys("gayanjanigamage@gmail.com");
+        USERID_FIELD.sendKeys(email);
         PASSWORD_FIELD.clear();
-        PASSWORD_FIELD.sendKeys("Password1234");
-        LOGIN_BTN.click();
+        PASSWORD_FIELD.sendKeys(password);
+        clickByJS(LOGIN_BTN);
+        Thread.sleep(6000);
+
+    }
+
+    @Override
+    public void proceedOnCheckout() {
 
     }
 }

@@ -17,15 +17,19 @@ public class HomePage {
     @FindBy(id = "search_query_top")
     private WebElement SEARCH_FIELD;
 
+    @FindBy(css = "[name='submit_search']")
+    private WebElement SEARCH_SUBMIT;
+
+
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public void search(String searchText) throws InterruptedException {
+    public void search(String searchText) {
         SEARCH_FIELD.clear();
         SEARCH_FIELD.sendKeys(searchText);
-        Thread.sleep(10);
-//        Assert.assertEquals(driver.getTitle(),"My Store");
+        SEARCH_SUBMIT.click();
     }
 }
